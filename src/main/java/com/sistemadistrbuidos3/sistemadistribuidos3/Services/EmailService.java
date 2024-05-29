@@ -12,32 +12,33 @@ public class EmailService {
     @Autowired
     private JavaMailSender emailSender;
 
-    public void sendWelcomeEmail(String email, String name) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(email);
-        message.setSubject("Bem-vindo ao Nosso Serviço");
-        message.setText("Olá " + name + ",\n\nBem-vindo ao nosso serviço!");
+    public void sendWelcomeEmail(String emailTo) {
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setFrom("marcelohenrikimiranha@gmail.com");
+        simpleMailMessage.setTo(emailTo);
+        simpleMailMessage.setSubject("Bem-vindo ao Nosso Serviço");
+        simpleMailMessage.setText("Olá, ficamos felizes em ter voce por aqui!");
 
         try {
-            emailSender.send(message);
-            System.out.println("E-mail de boas-vindas enviado para: " + email);
+            emailSender.send(simpleMailMessage);
         } catch (MailException e) {
-            System.out.println("Erro ao enviar e-mail de boas-vindas para: " + email);
             e.printStackTrace();
         }
     }
 
-    public void sendUpdateEmail(String email, String name, String updatedFields) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(email);
-        message.setSubject("Atualização de Informações");
-        message.setText("Olá " + name + ",\n\nSuas informações foram atualizadas: " + updatedFields);
+    public void sendUpdateEmail(String emailTo) {
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setFrom("marcelohenrikimiranha@gmail.com");
+        simpleMailMessage.setTo(emailTo);
+        simpleMailMessage.setSubject("Atualização de Informações");
+        simpleMailMessage.setText("""
+                Olá\s
+
+                Suas informações foram atualizadas: nome, email, idade, senha e endereco""");
 
         try {
-            emailSender.send(message);
-            System.out.println("E-mail de atualização enviado para: " + email);
+            emailSender.send(simpleMailMessage);
         } catch (MailException e) {
-            System.out.println("Erro ao enviar e-mail de atualização para: " + email);
             e.printStackTrace();
         }
     }

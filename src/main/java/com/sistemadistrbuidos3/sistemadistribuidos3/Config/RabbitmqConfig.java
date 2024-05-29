@@ -9,12 +9,12 @@ public class RabbitmqConfig {
 
     @Bean
     public Queue UserRegistrationQueue(){
-        return new Queue("user.registration.queue");
+        return new Queue("user.registration.email");
     }
 
     @Bean
     public Queue UserUpdateQueue(){
-        return new Queue("user.update.queue");
+        return new Queue("user.update.Details");
     }
 }
 
